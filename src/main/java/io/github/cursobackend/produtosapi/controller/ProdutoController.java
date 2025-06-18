@@ -4,6 +4,7 @@ import io.github.cursobackend.produtosapi.model.Produto;
 import io.github.cursobackend.produtosapi.repository.ProdutoRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -63,7 +64,6 @@ public class ProdutoController {
 
     /**
      * Atualiza um produto existente com base no identificador fornecido.
-     *
      * Este endpoint substitui os dados do produto identificado pelo ID informado
      * pelos valores presentes no corpo da requisição. O ID do produto é atribuído
      * diretamente ao objeto recebido antes de salvar no repositório.
@@ -76,5 +76,19 @@ public class ProdutoController {
                           @RequestBody Produto produto) {
         produto.setId(id);
         produtoRepository.save(produto);
+    }
+
+    /**
+     * Busca uma lista de produtos com base no nome fornecido.
+     * Este endpoint permite consultar produtos cujo nome corresponda ao parâmetro passado.
+     * A busca é realizada no repositório de produtos e retorna uma lista contendo os
+     * resultados encontrados. Caso nenhum produto corresponda ao nome, a lista retornada será vazia.
+     *
+     * @param nome o nome do produto a ser buscado
+     * @return uma lista de {@link Produto} com nomes correspondentes ao parâmetro informado
+     */
+    @GetMapping("/buscarProduto")
+    public List<Produto> buscarProduto(@RequestParam("nome") String nome) {
+        return produtoRepository.findByNome(nome);
     }
 }
