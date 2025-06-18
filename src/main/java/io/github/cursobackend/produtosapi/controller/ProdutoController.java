@@ -47,4 +47,17 @@ public class ProdutoController {
     public Produto obterPorId(@PathVariable("id") String id) {
         return produtoRepository.findById(id).orElse(null);
     }
+
+    /**
+     * Remove um produto do repositório com base no seu identificador único.
+     *
+     * Este endpoint recebe um ID na URL e realiza a exclusão do respectivo produto
+     * caso ele exista na base de dados. Não retorna conteúdo na resposta.
+     *
+     * @param id o identificador único do produto a ser excluído
+     */
+    @DeleteMapping("/apagarProdutoPorId/{id}")
+    public void deletar(@PathVariable("id") String id) {
+        produtoRepository.deleteById(id);
+    }
 }
