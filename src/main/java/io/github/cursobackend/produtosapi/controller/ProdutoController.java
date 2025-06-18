@@ -60,4 +60,21 @@ public class ProdutoController {
     public void deletar(@PathVariable("id") String id) {
         produtoRepository.deleteById(id);
     }
+
+    /**
+     * Atualiza um produto existente com base no identificador fornecido.
+     *
+     * Este endpoint substitui os dados do produto identificado pelo ID informado
+     * pelos valores presentes no corpo da requisição. O ID do produto é atribuído
+     * diretamente ao objeto recebido antes de salvar no repositório.
+     *
+     * @param id o identificador único do produto a ser atualizado
+     * @param produto o objeto {@link Produto} contendo os novos dados a serem persistidos
+     */
+    @PutMapping("/atualizarProdutoPorId/{id}")
+    public void atualizar(@PathVariable("id") String id,
+                          @RequestBody Produto produto) {
+        produto.setId(id);
+        produtoRepository.save(produto);
+    }
 }
