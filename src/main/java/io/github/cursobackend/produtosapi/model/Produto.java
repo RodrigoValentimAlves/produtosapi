@@ -1,10 +1,25 @@
 package io.github.cursobackend.produtosapi.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "produto")
 public class Produto {
 
+    @Id
+    @Column(name = "id")
     private String id;
-    private String nomeProduto;
+
+    @Column(name = "nome")
+    private String nome;
+
+    @Column(name = "descricao")
     private String descricao;
+
+    @Column(name = "preco")
     private Double preco;
 
     public String getId() {
@@ -15,12 +30,12 @@ public class Produto {
         this.id = id;
     }
 
-    public String getNomeProduto() {
-        return nomeProduto;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeProduto(String nomeProduto) {
-        this.nomeProduto = nomeProduto;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getDescricao() {
@@ -43,7 +58,7 @@ public class Produto {
     public String toString() {
         return "Produto{" +
                 "id='" + id + '\'' +
-                ", nomeProduto='" + nomeProduto + '\'' +
+                ", nome='" + nome + '\'' +
                 ", descricao='" + descricao + '\'' +
                 ", preco=" + preco +
                 '}';
